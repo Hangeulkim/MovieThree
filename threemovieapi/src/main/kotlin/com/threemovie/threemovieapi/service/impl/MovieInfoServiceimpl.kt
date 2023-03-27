@@ -24,10 +24,6 @@ class MovieInfoServiceimpl(
 		return movieInfoRepositorySupport.getMovieList()
 	}
 
-	override fun getMovieInfo() : List<MovieInfo>{
-		return movieDataRepository.findAll()
-	}
-
 	override fun save_MovieData(One_movie_Info: JSONObject, url_Daum_Main: String) {
 		val api_movie_data_screening = "api/movie/" + One_movie_Info.get("id").toString() + "/main"
 
@@ -61,22 +57,14 @@ class MovieInfoServiceimpl(
 		if(movie_data_json.get("titleKorean").equals(null)){
 			NameKR = null
 		} else {
-			if(movie_data_json.get("titleKorean").toString().length == 0){
-				NameKR = null
-			} else {
-				NameKR = movie_data_json.get("titleKorean").toString()
-			}
+			NameKR = movie_data_json.get("titleKorean").toString()
 		}
 
 		var NameEN: String?
 		if(movie_data_json.get("titleEnglish").equals(null)){
 			NameEN = null
 		} else {
-			if(movie_data_json.get("titleEnglish").toString().length == 0){
-				NameEN = null
-			} else {
-				NameEN = movie_data_json.get("titleEnglish").toString()
-			}
+			NameEN = movie_data_json.get("titleEnglish").toString()
 		}
 
 

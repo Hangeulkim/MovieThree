@@ -45,26 +45,10 @@ class MoviePreviewServiceimpl(
                 videoUrl_list.add(videoUrl.toString())
             }
         }
-
-        var str_imageUrl_list : String?
-        var str_videoUrl_list : String?
-
-        if(imageUrl_list.size == 0){
-            str_imageUrl_list = null
-        } else {
-            str_imageUrl_list = imageUrl_list.toString()
-        }
-
-        if(videoUrl_list.size == 0){
-            str_videoUrl_list = null
-        } else {
-            str_videoUrl_list = videoUrl_list.toString()
-        }
-
         val member_MoviePreview = MoviePreview(
             One_movie_Info.get("titleKorean").toString()+"_"+movie_releaseDate,
-            str_videoUrl_list,
-            str_videoUrl_list
+            imageUrl_list.toString(),
+            videoUrl_list.toString()
         )
 
         val res = MoviePreviewRepository.save(member_MoviePreview)
