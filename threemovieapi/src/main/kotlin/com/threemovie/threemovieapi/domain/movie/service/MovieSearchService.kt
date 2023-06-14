@@ -33,7 +33,6 @@ class MovieSearchService(
 		for(document in documents){
 			val searchName = JSONObject(JSONObject(document.toString()).get("document").toString()).get("titleKoreanExact").toString()
 			val tmp_similarity = CalcSimilarity.calcSimilarity(movieName, searchName)
-			println(movieName + ":" + searchName + " == " + tmp_similarity.toString())
 			if (tmp_similarity > 0.7 && similarity < tmp_similarity) {
 				similarity = tmp_similarity
 				resultMovieId = JSONObject(JSONObject(document.toString()).get("document").toString()).get("movieId").toString()
@@ -45,7 +44,6 @@ class MovieSearchService(
 		} else {
 			result = saveMovieDataSearchFail(movieName)
 		}
-		println(result)
 		return result
 	}
 	
