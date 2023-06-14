@@ -3,6 +3,7 @@ package com.threemovie.threemovieapi.domain.movie.service
 import com.threemovie.threemovieapi.domain.movie.entity.domain.MovieData
 import com.threemovie.threemovieapi.domain.movie.repository.MovieDataRepository
 import com.threemovie.threemovieapi.global.service.GET_DATA_USE_DAUM_API.Companion.GET_DATA_USE_DAUM_API
+import com.threemovie.threemovieapi.global.service.CalcSimilarity
 import org.json.JSONObject
 import org.springframework.stereotype.Service
 
@@ -27,23 +28,26 @@ class MovieSearchService(
 		)
 			.get("search_result").toString()
 		val documents = JSONObject(search_result).getJSONArray("documents")
-		if (documents.length() > 0) {
-			val resultMovieId = JSONObject(
-				JSONObject(documents[0].toString())
-					.get("document").toString()
-			)
-				.get("movieId").toString()
-			saveMovieDataSearchSuccess(movieName, resultMovieId)
-			result = resultMovieId
+		var resultMovieId: String = ""
+		var similarity: Double = 0.0
+		for(document in documents){
+			val searchName = JSONObject(JSONObject(document.toString()).get("document").toString()).get("titleKoreanExact").toString()
+			val tmp_similarity = CalcSimilarity.calcSimilarity(movieName, searchName)
+			if (tmp_similarity > 0.7 && similarity < tmp_similarity) {
+				similarity = tmp_similarity
+				resultMovieId = JSONObject(JSONObject(document.toString()).get("document").toString()).get("movieId").toString()
+			}
+		}
+
+		if(!resultMovieId.equals("")){
+			result = saveMovieDataSearchSuccess(movieName, resultMovieId)
 		} else {
-			println("else")
-			saveMovieDataSearchFail(movieName)
-			result = movieName
+			result = saveMovieDataSearchFail(movieName)
 		}
 		return result
 	}
 	
-	fun saveMovieDataSearchFail(movieName: String) {
+	fun saveMovieDataSearchFail(movieName: String):String {
 		val movieData_List = ArrayList<MovieData>()
 		try {
 			val movieData = MovieData(
@@ -69,15 +73,18 @@ class MovieSearchService(
 			println(e)
 		}
 		movieDataRepository.saveAll(movieData_List)
+		return movieName
 	}
 	
-	fun saveMovieDataSearchSuccess(movieName: String, movieId: String) {
+	fun saveMovieDataSearchSuccess(movieName: String, movieId: String): String {
 		val movieData_List = ArrayList<MovieData>()
+		var result: String = movieName
 		try {
 			val movieData = movieDataService.save_MovieData_new(movieId)
 			val movieCreators = movieCreatorService.save_MovieCreator_new(movieId, movieData)
 			val moviePreviews = moviePreviewService.save_MoviePreview_new(movieId, movieData)
-			
+
+			result = movieData.movieId
 			movieData.addCreators(movieCreators)
 			movieData.addPreviews(moviePreviews)
 			movieData_List.add(movieData)
@@ -87,5 +94,6 @@ class MovieSearchService(
 			println(e)
 		}
 		movieDataRepository.saveAll(movieData_List)
+		return result
 	}
 }
