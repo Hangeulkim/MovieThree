@@ -30,18 +30,18 @@
 
 ![전체구조](https://github.com/Hangeulkim/MovieThree/assets/41067036/db536330-f89b-40d1-a5b9-f7352324a270)
 
-사용된 스택
+#### 사용된 스택
 Nas : DS220+
 OS: DSM 7.1.1
 
-Docker
+###### Docker
 nginx:1.9.15 - alpine 
 node: 16.20.0
 jenkins:jdk17
 redis
 mariaDB 10
 
-Back End
+###### Back End
 Spring-Boot: 3.0.1
 jdk: 17
 Kotlin: 1.7.22
@@ -49,14 +49,14 @@ Jsoup:1.15.4
 querydsl:5.0.0:jakerta
 coroutine:1.7.1
 
-Front End
+###### Front End
 Npm: 16.20.0
 React
 Typescript
 
-사용되는 DB
-1. Jwt관리 용 Redis
-2. 일반적인 정보 저장 용 MariaDB
+###### 사용되는 DB
+Jwt관리 용 Redis
+일반적인 정보 저장 용 MariaDB
 
 ## 제작기
 MovieThree 제작(https://hdobby.tistory.com/118)
