@@ -18,8 +18,9 @@
 ![웹서비스](https://github.com/Hangeulkim/MovieThree/assets/41067036/cae4398b-c330-4090-aa90-c25067f88085)
 1. http로 접속시 nginx가 https로 리다이렉트 시킵니다.
 2. https로 접속 했다면 nginx가 location을 통해 /api 요청인지 프론트 요청인지를 판별합니다.
-3. location /api 라면 localhost:8080으로 proxy pass를 해줍니다.
-4. location /라면 localhost:3000으로 proxyt pass를 해줍니다.
+3. location /라면 localhost:3001으로 proxyt pass를 해줍니다.
+4. location /api 라면 localhost:8081으로 proxy pass를 해줍니다.
+
 
 ![jenkins](https://github.com/Hangeulkim/MovieThree/assets/41067036/a84c6411-f9bd-4619-9531-855d5bc062a0)
 1. GitHub main push 시 Git Action으로 GitLab에 push를 동일하게 날립니다.
