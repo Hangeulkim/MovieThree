@@ -15,8 +15,24 @@
 프론트와 백엔드의 상세 설명은 내부에 따로 존재합니다.
 
 ![웹서비스](https://github.com/Hangeulkim/MovieThree/assets/41067036/cae4398b-c330-4090-aa90-c25067f88085)
+1. http로 접속시 nginx가 https로 리다이렉트 시킵니다.
+2. https로 접속 했다면 nginx가 location을 통해 /api 요청인지 프론트 요청인지를 판별합니다.
+3. location /api 라면 localhost:8080으로 proxy pass를 해줍니다.
+4. location /라면 localhost:3000으로 proxyt pass를 해줍니다.
+
 ![jenkins](https://github.com/Hangeulkim/MovieThree/assets/41067036/a84c6411-f9bd-4619-9531-855d5bc062a0)
+1. GitHub main push 시 Git Action으로 GitLab에 push를 동일하게 날립니다.
+2. GitLab main에 push 가 들어올 경우 Jenkins에 push가 왔다는 알림을 보냅니다.
+3. Jenkins 에서 spring build와 node build를 실행 합니다.
+4. build된 백 엔드 서버는 docker file을 읽어 docker로 실행합니다.
+5. 프론트 서버의 경우 build가 되면 nodemon이 걸려 있는 폴더로 이동합니다.
+6. nodemon이 프론트의 변경점을 확인하고 반영 해줍니다.
+
 ![전체구조](https://github.com/Hangeulkim/MovieThree/assets/41067036/db536330-f89b-40d1-a5b9-f7352324a270)
+
+사용되는 DB
+1. Jwt관리 용 Redis
+2. 일반적인 정보 저장 용 MariaDB
 
 ## 제작기
 MovieThree 제작(https://hdobby.tistory.com/118)
