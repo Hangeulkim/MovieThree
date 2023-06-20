@@ -1,6 +1,5 @@
 package com.threemovie.threemovieapi.domain.user.service
 
-import com.threemovie.threemovieapi.domain.user.controller.request.AccountSignUpRequest
 import com.threemovie.threemovieapi.domain.user.entity.domain.UserData
 import com.threemovie.threemovieapi.domain.user.entity.domain.UserLogin
 import com.threemovie.threemovieapi.domain.user.entity.domain.UserSignUpAuth
@@ -20,6 +19,7 @@ import com.threemovie.threemovieapi.global.security.service.RedisUtil
 import com.threemovie.threemovieapi.global.service.RandomKeyString
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Service
@@ -45,8 +45,7 @@ class UserAuthService(
 		userSignUpAuthRepository.save(userSignUpAuth)
 	}
 	
-	fun signUpAccount(signUpRequest: AccountSignUpRequest) {
-		val (email, pass, nickName, sex, birth) = signUpRequest
+	fun signUpAccount(email: String, pass: String, nickName: String, sex: Boolean?, birth: LocalDate?) {
 		val encodePass = passwordEncoder.encode(pass)
 		
 		val userLogin = UserLogin(email, encodePass)

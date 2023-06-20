@@ -77,8 +77,8 @@ class UserAuthController(
 		userDataService.existsEmail(account.email, true)
 		userDataService.existsNickName(account.nickName)
 		
-		
-		userAuthService.signUpAccount(account)
+		val (email, pass, nickName, sex, birth) = account
+		userAuthService.signUpAccount(email, pass, nickName, sex, birth)
 		return ResponseEntity.status(HttpStatus.OK).body("성공적으로 가입 되었습니다.")
 	}
 	
