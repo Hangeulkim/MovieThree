@@ -88,7 +88,6 @@ class ShowTimeScheduler(
 				}
 			}
 			
-			println("showtime")
 			showTimeRepository.saveAll(showTimeList)
 			showTimeReserveRepositorySupport.deleteShowTimeReserveByTime(time)
 			showTimeRepositorySupport.deleteZeroReserveShowTime(time)

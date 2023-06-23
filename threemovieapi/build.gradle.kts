@@ -29,6 +29,7 @@ repositories {
 }
 
 dependencies {
+	kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-mustache")
 	implementation("org.springframework.boot:spring-boot-starter-graphql")
@@ -41,7 +42,6 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.jsoup:jsoup:1.15.4")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -56,7 +56,10 @@ dependencies {
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 	
-	kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
+	testImplementation("io.mockk:mockk:1.13.4")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testRuntimeOnly("com.h2database:h2")
+	testImplementation("it.ozimov:embedded-redis:0.7.3")
 }
 
 tasks.withType<Jar> {
