@@ -22,5 +22,5 @@ INSERT INTO user_login(id, email, password, role)
 VALUES ("12345678-1234-1234-1234-000000000006", "test@movie.com", moviethreepass, "USER");
 
 INSERT INTO user_data(id, birth, brch, categories, nick_name, sex, user_login_id)
-VALUES ("12345678-1234-1234-1234-000000000007", 2023 - 04 - 04, null, null, mttt, true,
+VALUES ("12345678-1234-1234-1234-000000000007", "2023 - 04 - 04", null, null, mttt, true,
         "12345678-1234-1234-1234-000000000006");
