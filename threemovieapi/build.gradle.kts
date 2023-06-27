@@ -55,7 +55,10 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
-	
+
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2")
+
 	kapt("com.querydsl:querydsl-apt:5.0.0:jakarta")
 }
 

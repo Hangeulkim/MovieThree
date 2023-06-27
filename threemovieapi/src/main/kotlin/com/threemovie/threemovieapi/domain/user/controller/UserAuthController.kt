@@ -1,9 +1,6 @@
 package com.threemovie.threemovieapi.domain.user.controller
 
-import com.threemovie.threemovieapi.domain.user.controller.request.AccountSignUpRequest
-import com.threemovie.threemovieapi.domain.user.controller.request.AuthRequest
-import com.threemovie.threemovieapi.domain.user.controller.request.EmailRequest
-import com.threemovie.threemovieapi.domain.user.controller.request.LoginRequest
+import com.threemovie.threemovieapi.domain.user.controller.request.*
 import com.threemovie.threemovieapi.domain.user.controller.response.AccessTokenResponse
 import com.threemovie.threemovieapi.domain.user.service.UserAuthService
 import com.threemovie.threemovieapi.domain.user.service.UserDataService
@@ -17,6 +14,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+
 @Tag(name = "UserAuthController", description = "인증 관련 컨트롤러")
 @RestController
 @CrossOrigin(origins = ["http://localhost:3000"])
@@ -25,9 +23,8 @@ class UserAuthController(
 	val userAuthService: UserAuthService,
 	val userDataService: UserDataService,
 	val jwtTokenProvider: JwtTokenProvider,
-	val redisUtil: RedisUtil
+	val redisUtil: RedisUtil,
 ) {
-	
 	@PostMapping("/send/code")
 	fun sendAuthEmail(@RequestBody emailRequest: EmailRequest): ResponseEntity<String> {
 		val (email, isSignUp) = emailRequest
